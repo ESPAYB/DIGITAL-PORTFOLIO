@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gene — Personal Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #171717;
+      --muted: #777;
+      --line: #e6e6e2;
+      --accent: #1d1d1b;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247, 247, 245, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(230, 230, 226, 0.7);
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 26px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    section {
+      width: min(1100px, 86%);
+      margin: auto;
+      padding: 110px 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 150px;
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 10vw, 8.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.09em;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 34px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      border-radius: 999px;
+      padding: 13px 22px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 35px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -0.07em;
+      line-height: 1;
+    }
+
+    .section-number {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 70px;
+    }
+
+    .about-text {
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-text span {
+      color: var(--muted);
+    }
+
+    .details {
+      display: grid;
+      gap: 22px;
+    }
+
+    .detail {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 15px;
+    }
+
+    .detail small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      min-height: 280px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.07);
+    }
+
+    .project-tag {
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .project h3 {
+      font-size: 1.7rem;
+      letter-spacing: -0.05em;
+      margin: 15px 0 8px;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .project-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-top: 25px;
+    }
+
+    .timeline {
+      border-left: 1px solid var(--line);
+      padding-left: 25px;
+      display: grid;
+      gap: 35px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 7px;
+      width: 10px;
+      height: 10px;
+      background: var(--text);
+      border-radius: 50%;
+    }
+
+    .timeline-year {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .timeline h3 {
+      margin: 5px 0;
+      font-size: 1.25rem;
+    }
+
+    .timeline p {
+      color: var(--muted);
+    }
+
+    .interests {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .interest {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      min-height: 150px;
+      display: flex;
+      align-items: end;
+      padding: 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .contact {
+      text-align: center;
+      background: var(--text);
+      color: white;
+      border-radius: 30px;
+      padding: 80px 25px;
+    }
+
+    .contact h2 {
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      color: #bcbcb8;
+      margin-bottom: 28px;
+    }
+
+    .contact .button {
+      background: white;
+      color: var(--text);
+    }
+
+    footer {
+      width: 86%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        padding: 18px 7%;
+      }
+
+      nav ul {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 0.7rem;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .about-grid,
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .interests {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        min-height: 90vh;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">G.</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Personal Portfolio · 2026</div>
+        <h1>Gene<br>Andrei.</h1>
+        <p>
+          Computer Science student specializing in AI, building thoughtful
+          digital solutions through code, creativity, and continuous learning.
+        </p>
+        <a class="button" href="#about">Explore my work ↓</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-heading">
+        <h2>About me</h2>
+        <span class="section-number">01 / 05</span>
+      </div>
+
+      <div class="about-grid">
+        <p class="about-text">
+          I am a curious computer science student interested in
+          <span>artificial intelligence, software development, mathematics,
+          and practical problem-solving.</span>
+          This portfolio is a collection of the things I am learning and creating.
+        </p>
+
+        <div class="details">
+          <div class="detail">
+            <small>Based in</small>
+            Philippines
+          </div>
+          <div class="detail">
+            <small>Currently studying</small>
+            Computer Science — AI Specialization
+          </div>
+          <div class="detail">
+            <small>Focus</small>
+            Technology, learning, and creative projects
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Skills</h2>
+        <span class="section-number">02 / 05</span>
+      </div>
+
+      <div class="skills">
+        <div class="skill">Java</div>
+        <div class="skill">Python</div>
+        <div class="skill">SQL</div>
+        <div class="skill">HTML & CSS</div>
+        <div class="skill">Artificial Intelligence</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Data Structures</div>
+        <div class="skill">Mathematics</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-heading">
+        <h2>Selected projects</h2>
+        <span class="section-number">03 / 05</span>
+      </div>
+
+      <div class="projects">
+        <article class="project">
+          <div>
+            <div class="project-tag">Java · Data Structures</div>
+            <h3>Library Borrowing System</h3>
+            <p>A menu-driven system for borrowing, returning, reserving, and finding books.</p>
+          </div>
+          <a class="project-link" href="#">View project ↗</a>
+        </article>
+
+        <article class="project">
+          <div>
+            <div class="project-tag">Java Swing · GUI</div>
+            <h3>Tuition Calculator</h3>
+            <p>A desktop application that calculates tuition fees through a simple graphical interface.</p>
+          </div>
+          <a class="project-link" href="#">View project ↗</a>
+        </article>
+
+        <article class="project">
+          <div>
+            <div class="project-tag">SQL · Database</div>
+            <h3>Database Management</h3>
+            <p>A relational database project involving locations, employees, departments, and constraints.</p>
+          </div>
+          <a class="project-link" href="#">View project ↗</a>
+        </article>
+
+        <article class="project">
+          <div>
+            <div class="project-tag">Web · Personal</div>
+            <h3>Digital Portfolio</h3>
+            <p>A minimal personal website presenting my background, interests, skills, and academic work.</p>
+          </div>
+          <a class="project-link" href="#">View project ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="section-heading">
+        <h2>Resume & achievements</h2>
+        <span class="section-number">04 / 05</span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2026 — Present</div>
+          <h3>Computer Science Student</h3>
+          <p>Developing skills in programming, databases, algorithms, mathematics, and artificial intelligence.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Academic Work</div>
+          <h3>Programming and Database Projects</h3>
+          <p>Created Java applications, SQL database solutions, and algorithmic exercises for coursework.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Personal Development</div>
+          <h3>Continuous Learner</h3>
+          <p>Exploring technology, fitness, creative communication, and practical problem-solving.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Beyond code</h2>
+        <span class="section-number">05 / 05</span>
+      </div>
+
+      <div class="interests">
+        <div class="interest">Cycling</div>
+        <div class="interest">Fitness</div>
+        <div class="interest">Mathematics</div>
+        <div class="interest">Technology</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <h2>Let’s connect.</h2>
+        <p>Have a project, opportunity, or idea to discuss?</p>
+        <a class="button" href="mailto:your.email@example.com">Get in touch ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Gene Andrei</span>
+    <span>Designed and built with intention.</span>
+  </footer>
+</body>
+</html>
