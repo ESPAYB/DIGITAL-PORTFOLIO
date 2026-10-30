@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gene Andrei — Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #080b12;
+      --surface: #101621;
+      --surface-2: #151d2b;
+      --text: #f4f7fb;
+      --muted: #929caf;
+      --line: #263143;
+      --accent: #66aaff;
+      --accent-2: #a879ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, .25);
+    }
+
+    body.light {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #edf2f8;
+      --text: #101722;
+      --muted: #607087;
+      --line: #dbe3ef;
+      --accent: #216ee8;
+      --accent-2: #7848d8;
+      --shadow: 0 20px 60px rgba(35, 55, 85, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 80% 5%, rgba(102, 170, 255, .12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      transition: background .3s, color .3s;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 7%;
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      color: var(--accent);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .icon-button,
+    .menu-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+    }
+
+    .menu-button {
+      display: none;
+      border-radius: 8px;
+    }
+
+    main {
+      width: min(1100px, 86%);
+      margin: auto;
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .75rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3.8rem, 11vw, 8.5rem);
+      letter-spacing: -.1em;
+      line-height: .86;
+      margin-bottom: 28px;
+    }
+
+    .gradient {
+      background: linear-gradient(100deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 590px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #07101d;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .85rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(102, 170, 255, .25);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 35px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -.07em;
+      line-height: 1;
+    }
+
+    .number {
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 70px;
+    }
+
+    .about-text {
+      font-size: 1.35rem;
+    }
+
+    .about-text span,
+    .detail small,
+    .project-tag,
+    .timeline-year {
+      color: var(--muted);
+    }
+
+    .details {
+      display: grid;
+      gap: 20px;
+    }
+
+    .detail {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+    }
+
+    .detail small {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .7rem;
+      margin-bottom: 4px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: var(--text);
+      transition: border-color .2s, transform .2s;
+    }
+
+    .skill:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--accent);
+      color: #07101d;
+      border-color: var(--accent);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 25px;
+      background: linear-gradient(145deg, var(--surface), var(--surface-2));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .project-tag {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .project h3 {
+      font-size: 1.55rem;
+      margin: 15px 0 8px;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .project button {
+      align-self: flex-start;
+      margin-top: 20px;
+      border: 0;
+      background: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .timeline {
+      border-left: 1px solid var(--line);
+      padding-left: 25px;
+      display: grid;
+      gap: 35px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 7px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .timeline h3 {
+      margin: 5px 0;
+    }
+
+    .timeline p {
+      color: var(--muted);
+    }
+
+    .interests {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .interest {
+      min-height: 140px;
+      display: flex;
+      align-items: end;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--surface);
+      font-weight: bold;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .interest:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .contact {
+      text-align: center;
+      padding: 75px 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #101b2c, #17253b);
+    }
+
+    .contact p {
+      color: #aab7ca;
+      margin: 15px 0 25px;
+    }
+
+    footer {
+      width: 86%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: .8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .7);
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-card {
+      max-width: 500px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-card p {
+      color: var(--muted);
+      margin: 15px 0 22px;
+    }
+
+    .close {
+      float: right;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s, transform .7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      nav ul {
+        position: absolute;
+        top: 70px;
+        right: 7%;
+        display: none;
+        flex-direction: column;
+        width: 180px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+      }
+
+      nav ul.open {
+        display: flex;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .about-grid,
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .interests {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">G.</div>
+
+    <ul id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-button" id="themeToggle" title="Toggle theme">☼</button>
+      <button class="menu-button" id="menuToggle">☰</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content reveal">
+        <div class="eyebrow">Computer Science · AI Specialization</div>
+        <h1>Gene<br><span class="gradient">Andrei.</span></h1>
+        <p>
+          A curious computer science student building thoughtful digital
+          solutions through code, mathematics, creativity, and continuous learning.
+        </p>
+        <a class="button" href="#projects">Explore my work ↓</a>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <div class="section-heading">
+        <h2>About me</h2>
+        <span class="number">01 / 05</span>
+      </div>
+
+      <div class="about-grid">
+        <p class="about-text">
+          I am interested in <span>artificial intelligence, software development,
+          mathematics, and practical problem-solving.</span> This portfolio
+          presents the things I am learning and creating.
+        </p>
+
+        <div class="details">
+          <div class="detail">
+            <small>Based in</small>
+            Philippines
+          </div>
+          <div class="detail">
+            <small>Currently studying</small>
+            Computer Science — AI Specialization
+          </div>
+          <div class="detail">
+            <small>Focus</small>
+            Technology, learning, and creative projects
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <div class="section-heading">
+        <h2>Skills</h2>
+        <span class="number">02 / 05</span>
+      </div>
+
+      <div class="skills">
+        <div class="skill">Java</div>
+        <div class="skill">Python</div>
+        <div class="skill">SQL</div>
+        <div class="skill">HTML & CSS</div>
+        <div class="skill">Artificial Intelligence</div>
+        <div class="skill">Data Structures</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Mathematics</div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <span class="number">03 / 05</span>
+      </div>
+
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="java">Java</button>
+        <button class="filter" data-filter="database">Database</button>
+        <button class="filter" data-filter="web">Web</button>
+      </div>
+
+      <div class="projects">
+        <article class="project" data-category="java">
+          <div>
+            <div class="project-tag">Java · Data Structures</div>
+            <h3>Library Borrowing System</h3>
+            <p>A system for borrowing, returning, reserving, and finding books.</p>
+          </div>
+          <button data-project="library">View details ↗</button>
+        </article>
+
+        <article class="project" data-category="java">
+          <div>
+            <div class="project-tag">Java Swing · GUI</div>
+            <h3>Tuition Calculator</h3>
+            <p>A desktop application that calculates tuition fees through a GUI.</p>
+          </div>
+          <button data-project="tuition">View details ↗</button>
+        </article>
+
+        <article class="project" data-category="database">
+          <div>
+            <div class="project-tag">SQL · Database</div>
+            <h3>Database Management</h3>
+            <p>A relational database involving locations, employees, and departments.</p>
+          </div>
+          <button data-project="database">View details ↗</button>
+        </article>
+
+        <article class="project" data-category="web">
+          <div>
+            <div class="project-tag">HTML · CSS · JavaScript</div>
+            <h3>Digital Portfolio</h3>
+            <p>An interactive personal website presenting my work and interests.</p>
+          </div>
+          <button data-project="portfolio">View details ↗</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="resume" class="reveal">
+      <div class="section-heading">
+        <h2>Resume</h2>
+        <span class="number">04 / 05</span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2026 — Present</div>
+          <h3>Computer Science Student</h3>
+          <p>Developing skills in programming, databases, algorithms, mathematics, and AI.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Academic Work</div>
+          <h3>Programming and Database Projects</h3>
+          <p>Created Java applications, SQL solutions, and algorithmic coursework.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Personal Development</div>
+          <h3>Continuous Learner</h3>
+          <p>Exploring technology, fitness, creative communication, and problem-solving.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-heading">
+        <h2>Beyond code</h2>
+        <span class="number">05 / 05</span>
+      </div>
+
+      <div class="interests">
+        <div class="interest">Cycling</div>
+        <div class="interest">Fitness</div>
+        <div class="interest">Mathematics</div>
+        <div class="interest">Technology</div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="contact">
+        <h2>Let’s connect.</h2>
+        <p>Have a project, opportunity, or idea to discuss?</p>
+        <a class="button" href="mailto:your.email@example.com">Get in touch ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Gene Andrei</span>
+    <span>Minimal dark futuristic portfolio</span>
+  </footer>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-card">
+      <button class="close" id="closeModal">×</button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <a class="button" href="#contact" id="modalAction">Discuss project</a>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      themeToggle.textContent = document.body.classList.contains("light") ? "☾" : "☼";
+    });
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const filters = document.querySelectorAll(".filter");
+    const projects = document.querySelectorAll(".project");
+
+    filters.forEach(filter => {
+      filter.addEventListener("click", () => {
+        filters.forEach(btn => btn.classList.remove("active"));
+        filter.classList.add("active");
+
+        const selected = filter.dataset.filter;
+
+        projects.forEach(project => {
+          project.style.display =
+            selected === "all" || project.dataset.category === selected
+              ? "flex"
+              : "none";
+        });
+      });
+    });
+
+    const projectInfo = {
+      library: {
+        title: "Library Borrowing System",
+        text: "A Java menu-driven system using data structures for book borrowing, returning, reservations, waiting lists, and book searching."
+      },
+      tuition: {
+        title: "Tuition Calculator",
+        text: "A Java Swing desktop application that accepts student information and computes tuition fees through an interactive graphical interface."
+      },
+      database: {
+        title: "Database Management",
+        text: "A SQL database project focused on relational tables, constraints, locations, employees, departments, and organized queries."
+      },
+      portfolio: {
+        title: "Digital Portfolio",
+        text: "This responsive website uses HTML, CSS, and JavaScript to create a clean, interactive personal portfolio."
+      }
+    };
+
+    const modal = document.getElementById("projectModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+
+    document.querySelectorAll("[data-project]").forEach(button => {
+      button.addEventListener("click", () => {
+        const data = projectInfo[button.dataset.project];
+        modalTitle.textContent = data.title;
+        modalText.textContent = data.text;
+        modal.classList.add("show");
+      });
+    });
+
+    document.getElementById("closeModal").addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) modal.classList.remove("show");
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+  </script>
+</body>
+</html>
